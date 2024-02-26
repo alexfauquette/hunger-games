@@ -25,7 +25,7 @@ try {
         var w = video.videoWidth;
         var h = video.videoHeight;
 
-        var canvas = document.createElement('canvas');
+        
         interm.textContent = JSON.stringify({
             video: {
                 x:0, y:(h-h%2)/2, w, h:(w-w%10)/10, 
@@ -34,9 +34,9 @@ try {
                x: 0, y:0, w:500, h:50
             }
         }, null, 2)        
-        var ctx = canvas.getContext('2d');
+        var ctx = canvas1.getContext('2d');
         ctx.drawImage(video, 0, (h-h%2)/2, w, (w-w%10)/10, 0, 0, 500, 50);
-        return canvas;
+        return canvas1;
     }
   const capture = async () => {
     try {
