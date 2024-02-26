@@ -8,6 +8,7 @@ try {
   const start = document.getElementById("start");
   const video = document.getElementById("video");
   const result = document.getElementById("result");
+  const result2 = document.getElementById("result2");
   const interm = document.getElementById("interm");
   const error = document.getElementById("error");
   const canvas1 = document.getElementById("canvas1");
@@ -40,9 +41,13 @@ try {
     }
   const capture = async () => {
     try {
-      const barcodes = await bd.detect(reshape(video));
+      const barcodes = await bd.detect(video);
       const log = barcodes.map(({format, rawValue}) => `- ${format}: ${rawValue}`).join("\n");
       result.textContent = log;
+
+      const barcodes2 = await bd.detect(reshape(video));
+      const log2 = barcodes2.map(({format, rawValue}) => `- ${format}: ${rawValue}`).join("\n");
+      result2.textContent = log;
       requestAnimationFrame(capture);
     } catch (err) {
         error.textContent=err
@@ -77,6 +82,7 @@ try {
     <pre id="result"></pre>
     <pre id="interm"></pre>
     <pre id="error"></pre>
-    <canvas id="canvas1" width="500" height="50" style="background-color: red;"></canvas>
+    <canvas id="canvas1" width="500" height="50" style="background-color: green;"></canvas>
+    <pre id="result2"></pre>
   </body>
 </html>
