@@ -42,7 +42,7 @@ try {
     try {
       const barcodes = await bd.detect(reshape(video));
       const log = barcodes.map(({format, rawValue}) => `- ${format}: ${rawValue}`).join("\n");
-      if (log) result.textContent = log;
+      result.textContent = log;
       requestAnimationFrame(capture);
     } catch (err) {
         error.textContent=err
