@@ -8,6 +8,7 @@ try {
   const start = document.getElementById("start");
   const video = document.getElementById("video");
   const result = document.getElementById("result");
+  const canvas1 = document.getElementById("canvas1");
   
   const bd = new BarcodeDetector();
   (async () => {
@@ -18,9 +19,19 @@ try {
     result.textContent = err;
   });
 
+  function reshape(video) {
+        var w = video.videoWidth;
+        var h = video.videoHeight;
+
+        var canvas = document.createElement('canvas');
+        
+        var ctx = canvas.getContext('2d');
+        ctx.drawImage(video, 0, (h-h%2)/2, w, (w-w%10)/10, 0, 0, 500, 50);
+        return canvas;
+    }
   const capture = async () => {
     try {
-      const barcodes = await bd.detect(video);
+      const barcodes = await bd.detect(reshape(video));
       const log = barcodes.map(({format, rawValue}) => `- ${format}: ${rawValue}`).join("\n");
       if (log) result.textContent = log;
       requestAnimationFrame(capture);
@@ -44,6 +55,7 @@ try {
       video.autoplay = true;
     })().catch(console.error);
   }, {once: true});
+
 } catch (err) {
   document.getElementById("result").textContent = err;
 }
@@ -53,5 +65,7 @@ try {
     BarcodeDetector demo: <button id="start">start</button>
     <div><video id="video" autoplay></div>
     <pre id="result"></pre>
+
+    <canvas id="canvas1" width="500" height="50"></canvas>
   </body>
 </html>
