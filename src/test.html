@@ -68,8 +68,8 @@
               text.textContent = value;
 
               const container = document.getElementById("seen");
-              container.appendChild(text);
-              container.appendChild(img);
+              container.prepend(img);
+              container.prepend(text);
             }
 
             requestAnimationFrame(capture);
