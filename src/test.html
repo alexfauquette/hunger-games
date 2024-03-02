@@ -41,6 +41,7 @@
             result.textContent = `${lastValue} (${valueCount})`;
 
             if (valueCount === 3 && !seen[value]) {
+              seen[value] = true;
               const w = video.videoWidth;
               const h = video.videoHeight;
               const imgCanvas = document.createElement("canvas");
@@ -61,7 +62,11 @@
               const img = document.createElement("img");
               img.src = imageSrc;
 
+              const text = document.createElement("p");
+              text.textContent = value;
+
               const container = document.getElementById("seen");
+              container.appendChild(text);
               container.appendChild(img);
             }
 
