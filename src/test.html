@@ -20,43 +20,6 @@
           result.textContent = err;
         });
 
-        function reshape(video) {
-          var w = video.videoWidth;
-          var h = video.videoHeight;
-
-          interm.textContent = JSON.stringify(
-            {
-              video: {
-                x: 0,
-                y: (h - (h % 2)) / 2,
-                w,
-                h: (w - (w % 10)) / 10,
-              },
-              canvas: {
-                x: 0,
-                y: 0,
-                w: 500,
-                h: 50,
-              },
-            },
-            null,
-            2,
-          );
-          var ctx = canvas1.getContext("2d");
-          ctx.drawImage(
-            video,
-            0,
-            (h - (h % 2)) / 2,
-            w,
-            (w - (w % 10)) / 10,
-            0,
-            0,
-            500,
-            50,
-          );
-          return canvas1;
-        }
-
         let lastValue = "";
         let valueCount = 0;
 
@@ -136,12 +99,12 @@
   <body>
     BarcodeDetector demo: <button id="start">start</button>
     <div><video id="video" autoplay></video></div>
-    <!--
+
     <pre id="result"></pre>
     <pre id="interm"></pre>
     <pre id="error"></pre>
     <pre id="result2"></pre>
-  -->
+
     <div id="seen"></div>
   </body>
 </html>
