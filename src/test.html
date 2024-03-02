@@ -97,6 +97,23 @@
               video.srcObject = media;
               video.autoplay = true;
             })().catch(console.error);
+
+            (async () => {
+              const devices = await navigator.mediaDevices.enumerateDevices({
+                auido: false,
+                video: {
+                  //NOTE: crash on android  chrome when specified the size
+                  //width: {ideal: 800}, height: {ideal: 800},
+                  facingMode: "environment",
+                },
+              });
+
+              document.getElementById("media").textContent = JSON.stringify(
+                devices,
+                null,
+                2,
+              );
+            })();
           },
           { once: true },
         );
@@ -109,6 +126,7 @@
     BarcodeDetector demo: <button id="start">start</button>
     <div><video id="video" autoplay></video></div>
 
+    <pre id="media"></pre>
     <pre id="result"></pre>
     <pre id="interm"></pre>
     <pre id="error"></pre>
