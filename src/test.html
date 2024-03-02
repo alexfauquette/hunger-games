@@ -10,7 +10,9 @@
 
         const bd = new BarcodeDetector();
 
-        const seen = {}(async () => {
+        const seen = {};
+
+        (async () => {
           // It works on chrome on Android (chrome://flags Experimental Web Platform features)
           //NOTE: Not implemented yet: chrome canary 84 on macos
           result.textContent = (
