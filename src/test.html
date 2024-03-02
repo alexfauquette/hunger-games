@@ -28,7 +28,9 @@
         const capture = async () => {
           try {
             const barcodes = await bd.detect(video);
-            const value = barcodes.find(({ format }) => format === "ean_13");
+            const barcode = barcodes.find(({ format }) => format === "ean_13");
+
+            const value = barcode && barcode.rawValue;
 
             if (value !== null) {
               if (lastValue === value) {
